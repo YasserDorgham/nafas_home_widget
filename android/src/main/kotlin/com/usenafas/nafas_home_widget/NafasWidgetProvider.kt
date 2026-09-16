@@ -1,5 +1,6 @@
 package com.usenafas.nafas_home_widget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.net.Uri
@@ -35,6 +36,7 @@ class NafasWidgetProvider : HomeWidgetProvider() {
                 "Target: $targetCount"
             )
 
+            // + button: log a cigarette.
             val logCigaretteIntent =
                 HomeWidgetBackgroundIntent.getBroadcast(
                     context,
@@ -45,6 +47,26 @@ class NafasWidgetProvider : HomeWidgetProvider() {
                 R.id.widget_log_button,
                 logCigaretteIntent
             )
+
+            // Everywhere else: open Nafas.
+            val launchIntent =
+                context.packageManager.getLaunchIntentForPackage(
+                    context.packageName
+                )
+
+            if (launchIntent != null) {
+                val openAppIntent = PendingIntent.getActivity(
+                    context,
+                    widgetId,
+                    launchIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+
+                views.setOnClickPendingIntent(
+                    R.id.widget_root,
+                    openAppIntent
+                )
+            }
 
             appWidgetManager.updateAppWidget(
                 widgetId,
