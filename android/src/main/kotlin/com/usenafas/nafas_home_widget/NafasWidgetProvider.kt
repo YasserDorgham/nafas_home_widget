@@ -25,7 +25,28 @@ class NafasWidgetProvider : HomeWidgetProvider() {
                 context.packageName,
                 R.layout.nafas_widget
             )
+val isLoading = widgetData.getBoolean("isLoading", false)
 
+views.setViewVisibility(
+    R.id.widget_loading,
+    if (isLoading) android.view.View.VISIBLE else android.view.View.GONE
+)
+
+views.setTextViewText(
+    R.id.widget_log_button,
+    if (isLoading) "" else "+"
+)
+
+views.setBoolean(
+    R.id.widget_log_button,
+    "setEnabled",
+    !isLoading
+)
+
+views.setContentDescription(
+    R.id.widget_log_button,
+    if (isLoading) "Saving cigarette" else "Log one cigarette"
+)
             views.setTextViewText(
                 R.id.widget_today,
                 "Today: $todayCount"

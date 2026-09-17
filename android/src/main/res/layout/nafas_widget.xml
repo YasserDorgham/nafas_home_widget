@@ -44,16 +44,34 @@
 
     </LinearLayout>
 
+    <FrameLayout
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:layout_marginStart="10dp">
+
     <Button
         android:id="@+id/widget_log_button"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:backgroundTint="#437861"
         android:text="+"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:contentDescription="Log one cigarette" />
+
+    <ProgressBar
+        android:id="@+id/widget_loading"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="#FFFFFF"
+        android:visibility="gone"
+        android:contentDescription="Saving cigarette" />
+
+</FrameLayout>
 
 </LinearLayout>
